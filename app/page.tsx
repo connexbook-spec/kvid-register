@@ -4,23 +4,35 @@ import { useState, useRef, FormEvent, DragEvent } from "react";
 
 const PACKAGES = [
   {
-    id: "STANDARD",
-    name: "📦 แพ็กเกจ STANDARD (2,990.-)",
-    price: 2990,
+    id: "GEM_A01",
+    name: "🏪 GEM นักขายท้องถิ่น A01",
+    price: 590,
+    originalPrice: 2990,
+    image: "/gem-a01.png",
     features: [
-      "เหมาะสำหรับสายเรียนรู้ด้วยตัวเอง ดูทบทวนได้ไม่จำกัด",
-      "วีดีโอ 14 EP",
-      "สิทธิ์ในการใช้งานโปรแกรม KVID 2 เดือน",
+      "📩 รับ GEM ทางเมลภายใน 24 ชั่วโมง!!!",
+      "🎬 คลิปสอนการใช้งานความยาว 49 นาที (เรียนจบทำตามได้ทันที)",
     ],
   },
   {
-    id: "VIP",
-    name: "👑 แพ็กเกจ VIP MASTERCLASS (3,990.-)",
-    price: 3990,
+    id: "GEM_A02",
+    name: "📦 GEM นักขายโกดังระเบิด A02",
+    price: 590,
+    originalPrice: 2990,
     features: [
-      "ได้ครบทุกอย่างในแพ็กเกจ STANDARD (คอร์สวีดีโอ 14 EP ดูทบทวนได้ไม่จำกัด)",
-      "สิทธิ์เข้า Live Workshop ในกลุ่มปิด 6 ครั้ง (ลุยด้วยกันตลอดเดือน มีนาคม ถาม-ตอบ สดๆ)",
-      "อัปเกรดสิทธิ์ในการใช้งานโปรแกรม KVID เป็น 3 เดือนเต็ม! (จุใจกว่า มีเวลาปั้นคลิปทำเงินได้ยาวๆ)",
+      "📩 รับ GEM ทางเมลภายใน 24 ชั่วโมง!!!",
+      "🎬 คลิปสอนการใช้งานความยาว 59 นาที (เรียนจบทำตามได้ทันที)",
+    ],
+  },
+  {
+    id: "GEM_COMBO",
+    name: "🔥 โปรแพ็คคู่!!! (A01 & A02)",
+    price: 990,
+    originalPrice: 5980,
+    features: [
+      "🏪 GEM นักขายท้องถิ่น A01 + 📦 GEM นักขายโกดังระเบิด A02",
+      "📩 รับทั้ง 2 GEM ทางเมลภายใน 24 ชั่วโมง!!!",
+      "🎬 คลิปสอนการใช้งานทั้ง 2 GEM (เรียนจบทำตามได้ทันที)",
     ],
   },
 ];
@@ -141,7 +153,7 @@ export default function RegisterPage() {
       {/* Navbar */}
       <nav className="bg-slate-950/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <span className="text-xl font-bold text-white">KVid</span>
+          <span className="text-xl font-bold text-white">GEMinw</span>
         </div>
       </nav>
 
@@ -157,7 +169,9 @@ export default function RegisterPage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
-          คอร์สเสกเงินในอากาศ ด้วย AI ปักตะกร้า ฉบับนายหน้า TikTok
+          GEM โกยยอดขาย 7 หลัก<br />
+          ด้วย Ai ปักตะกร้า<br />
+          ฉบับนายหน้า TikTok
         </h2>
         <p className="text-slate-400 text-center mb-8">กรอกข้อมูลเพื่อสมัคร</p>
 
@@ -195,16 +209,30 @@ export default function RegisterPage() {
                           : "border-slate-600 bg-slate-800/50 hover:border-slate-500"
                       }`}
                     >
+                      {pkg.image && (
+                        <img
+                          src={pkg.image}
+                          alt={pkg.name}
+                          className="w-full rounded-lg mb-3"
+                        />
+                      )}
                       <div className="flex justify-between items-start mb-2">
                         <span className="font-semibold text-white">{pkg.name}</span>
-                        <span className="text-amber-400 font-bold text-lg">
-                          ฿{pkg.price.toLocaleString()}
-                        </span>
+                        <div className="text-right shrink-0 ml-2">
+                          {pkg.originalPrice && (
+                            <span className="text-slate-500 line-through text-sm block">
+                              ฿{pkg.originalPrice.toLocaleString()}
+                            </span>
+                          )}
+                          <span className="text-amber-400 font-bold text-lg">
+                            ฿{pkg.price.toLocaleString()}.-
+                          </span>
+                        </div>
                       </div>
                       <div className="space-y-1">
                         {pkg.features.map((f, i) => (
                           <p key={i} className="text-sm text-slate-300">
-                            ✅ {f}
+                            {f}
                           </p>
                         ))}
                       </div>
@@ -320,17 +348,17 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Facebook */}
+                {/* Gemini Email */}
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">
-                    ชื่อ Facebook <span className="text-red-400">*</span>
+                    Email ที่ใช้งาน Gemini <span className="text-red-400">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     required
                     value={facebook}
                     onChange={(e) => setFacebook(e.target.value)}
-                    placeholder="ชื่อ Facebook สำหรับเข้ากลุ่ม"
+                    placeholder="Email ที่ใช้งาน Gemini สำหรับเพิ่ม GEM ให้ใช้งาน"
                     className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
                   />
                 </div>
@@ -438,7 +466,7 @@ export default function RegisterPage() {
       {/* Footer */}
       <footer className="border-t border-slate-800 py-6 mt-12">
         <p className="text-center text-slate-500 text-sm">
-          © 2026 KVid. All rights reserved.
+          © 2026 GEMinw. All rights reserved.
         </p>
       </footer>
     </div>
