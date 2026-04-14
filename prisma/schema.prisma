@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Registration {
+  id             Int      @id @default(autoincrement())
+  package        String   // STANDARD or VIP
+  fullName       String
+  lineId         String
+  phone          String
+  email          String
+  facebook       String
+  referralCode   String?
+  slipPath       String
+  needTaxInvoice Boolean  @default(false)
+  status         String   @default("pending") // pending, approved, rejected
+  createdAt      DateTime @default(now())
+}
