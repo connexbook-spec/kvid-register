@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sendLineNotify } from "@/lib/line-notify";
 
 export async function POST(request: NextRequest) {
   try {
@@ -65,6 +66,22 @@ export async function POST(request: NextRequest) {
         needTaxInvoice,
       },
     });
+
+    // Send LINE Notify
+    const pkgNames: Record<string, string> = {
+      GEM_A01: "GEM นักขายท้องถิ่น A01 (590.-)",
+      GEM_A02: "GEM นักขายโกดังระเบิด A02 (590.-)",
+      GEM_COMBO: "โปรแพ็คคู่ A01+A02 (990.-)",
+    };
+    await sendLineNotify(
+      `\n📋 สมัครใหม่ #${registration.id}\n` +
+      `📦 ${pkgNames[pkg] || pkg}\n` +
+      `👤 ${fullName}\n` +
+      `📱 ${phone}\n` +
+      `📧 ${email}\n` +
+      `💬 LINE: ${lineId}\n` +
+      `🔗 ดูรายละเอียด: https://geminw-register.vercel.app/admin`
+    );
 
     return NextResponse.json({
       success: true,

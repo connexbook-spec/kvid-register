@@ -158,11 +158,11 @@ export default function RegisterPage() {
       </nav>
 
       {/* Hero Banner */}
-      <div className="w-full flex justify-center bg-slate-950">
+      <div className="w-full bg-slate-950">
         <img
           src="/banner.png"
-          alt="GEM นักขายท้องถิ่น A01 - สินค้าแท้ ส่งตรงจากท้องถิ่น"
-          className="w-full max-w-2xl aspect-square object-cover"
+          alt="GEM โกยยอดขาย 7 หลัก ด้วย Ai ปักตะกร้า ฉบับนายหน้า TikTok"
+          className="w-full object-contain"
         />
       </div>
 
