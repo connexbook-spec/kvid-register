@@ -8,8 +8,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "สมัคร คอร์สเสกเงินในอากาศ ด้วย AI ปักตะกร้า ฉบับนายหน้า TikTok - KVid",
-  description: "คอร์สเสกเงินในอากาศ ด้วย AI ปักตะกร้า ฉบับนายหน้า TikTok",
+  title: "GEMinw - GEM โกยยอดขาย 7 หลัก ด้วย Ai ปักตะกร้า ฉบับนายหน้า TikTok",
+  description: "GEM โกยยอดขาย 7 หลัก ด้วย Ai ปักตะกร้า ฉบับนายหน้า TikTok",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" className={`${geistSans.variable} antialiased`}>
-      <body className="min-h-screen bg-slate-900 text-slate-200">
+      <body className="min-h-screen bg-[#063347] text-[#E1E6EA]">
         {children}
       </body>
     </html>

@@ -149,16 +149,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#063347]">
       {/* Navbar */}
-      <nav className="bg-slate-950/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
+      <nav className="bg-[#042a3a]/80 backdrop-blur border-b border-[#506D7E]/30 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <span className="text-xl font-bold text-white">GEMinw</span>
         </div>
       </nav>
 
       {/* Hero Banner */}
-      <div className="w-full bg-slate-950">
+      <div className="w-full bg-[#042a3a]">
         <img
           src="/banner.png"
           alt="GEM โกยยอดขาย 7 หลัก ด้วย Ai ปักตะกร้า ฉบับนายหน้า TikTok"
@@ -173,7 +173,7 @@ export default function RegisterPage() {
           ด้วย Ai ปักตะกร้า<br />
           ฉบับนายหน้า TikTok
         </h2>
-        <p className="text-slate-400 text-center mb-8">กรอกข้อมูลเพื่อสมัคร</p>
+        <p className="text-[#B3BEC6]/70 text-center mb-8">กรอกข้อมูลเพื่อสมัคร</p>
 
         {/* Success/Error Message */}
         {submitResult && (
@@ -193,8 +193,8 @@ export default function RegisterPage() {
             {/* Left Column - Packages + Bank Info */}
             <div className="space-y-6">
               {/* Package Selection */}
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-slate-300 mb-4">
+              <div className="bg-[#506D7E]/20 border border-[#506D7E]/40 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-[#B3BEC6] mb-4">
                   แพ็กเกจที่เลือกได้
                 </h3>
                 <div className="space-y-4">
@@ -205,8 +205,8 @@ export default function RegisterPage() {
                       onClick={() => setSelectedPackage(pkg.id)}
                       className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                         selectedPackage === pkg.id
-                          ? "border-sky-500 bg-sky-950/50"
-                          : "border-slate-600 bg-slate-800/50 hover:border-slate-500"
+                          ? "border-[#E67700] bg-[#E67700]/10"
+                          : "border-[#506D7E] bg-[#506D7E]/20 hover:border-[#E67700]/60"
                       }`}
                     >
                       {pkg.image && (
@@ -220,18 +220,18 @@ export default function RegisterPage() {
                         <span className="font-semibold text-white">{pkg.name}</span>
                         <div className="text-right shrink-0 ml-2">
                           {pkg.originalPrice && (
-                            <span className="text-slate-500 line-through text-sm block">
+                            <span className="text-[#506D7E] line-through text-sm block">
                               ฿{pkg.originalPrice.toLocaleString()}
                             </span>
                           )}
-                          <span className="text-amber-400 font-bold text-lg">
+                          <span className="text-[#E67700] font-bold text-lg">
                             ฿{pkg.price.toLocaleString()}.-
                           </span>
                         </div>
                       </div>
                       <div className="space-y-1">
                         {pkg.features.map((f, i) => (
-                          <p key={i} className="text-sm text-slate-300">
+                          <p key={i} className="text-sm text-[#B3BEC6]">
                             {f}
                           </p>
                         ))}
@@ -242,17 +242,17 @@ export default function RegisterPage() {
               </div>
 
               {/* Bank Info */}
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-slate-300 mb-4">
+              <div className="bg-[#506D7E]/20 border border-[#506D7E]/40 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-[#B3BEC6] mb-4">
                   ข้อมูลการโอนเงิน
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">ธนาคาร</span>
+                    <span className="text-[#B3BEC6]/70">ธนาคาร</span>
                     <span className="text-white font-medium">{BANK_INFO.bank}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-slate-400">เลขบัญชี</span>
+                    <span className="text-[#B3BEC6]/70">เลขบัญชี</span>
                     <div className="flex items-center gap-2">
                       <span className="text-white font-bold text-lg">
                         {BANK_INFO.accountNumber}
@@ -260,21 +260,21 @@ export default function RegisterPage() {
                       <button
                         type="button"
                         onClick={copyAccountNumber}
-                        className="text-sm text-sky-400 hover:text-sky-300 flex items-center gap-1 transition-colors"
+                        className="text-sm text-[#E67700] hover:text-[#E67700]/80 flex items-center gap-1 transition-colors"
                       >
                         📋 {copied ? "คัดลอกแล้ว!" : "คัดลอก"}
                       </button>
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">ชื่อบัญชี</span>
+                    <span className="text-[#B3BEC6]/70">ชื่อบัญชี</span>
                     <span className="text-white font-medium">
                       {BANK_INFO.accountName}
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 p-3 bg-amber-900/30 border border-amber-700/50 rounded-lg">
-                  <p className="text-amber-300 text-sm">
+                <div className="mt-4 p-3 bg-[#E67700]/10 border border-[#E67700]/30 rounded-lg">
+                  <p className="text-[#E67700] text-sm">
                     หลังโอนเงินแล้ว กรุณาแนบสลิปเพื่อยืนยันการชำระเงิน
                     ระบบจะตรวจสอบสลิปอัตโนมัติ
                   </p>
@@ -283,14 +283,14 @@ export default function RegisterPage() {
             </div>
 
             {/* Right Column - Form */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-6 border-b border-slate-700 pb-3">
+            <div className="bg-[#506D7E]/20 border border-[#506D7E]/40 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-6 border-b border-[#506D7E]/40 pb-3">
                 กรอกข้อมูลสมัคร
               </h3>
               <div className="space-y-4">
                 {/* Full Name */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                     ชื่อ-นามสกุล <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -299,13 +299,13 @@ export default function RegisterPage() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="กรอกชื่อ-นามสกุล"
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                    className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                   />
                 </div>
 
                 {/* LINE ID */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                     LINE ID <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -314,14 +314,14 @@ export default function RegisterPage() {
                     value={lineId}
                     onChange={(e) => setLineId(e.target.value)}
                     placeholder="กรอก LINE ID"
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                    className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                   />
                 </div>
 
                 {/* Phone + Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1">
+                    <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                       เบอร์โทรศัพท์ <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -330,11 +330,11 @@ export default function RegisterPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="0812345678"
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                      className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1">
+                    <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                       Email <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -343,14 +343,14 @@ export default function RegisterPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="email@example.com"
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                      className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                     />
                   </div>
                 </div>
 
                 {/* Gemini Email */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                     Email ที่ใช้งาน Gemini <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -359,28 +359,28 @@ export default function RegisterPage() {
                     value={facebook}
                     onChange={(e) => setFacebook(e.target.value)}
                     placeholder="Email ที่ใช้งาน Gemini สำหรับเพิ่ม GEM ให้ใช้งาน"
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                    className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                   />
                 </div>
 
                 {/* Referral Code */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                     Referral Code{" "}
-                    <span className="text-slate-500 font-normal">(ถ้ามี)</span>
+                    <span className="text-[#506D7E] font-normal">(ถ้ามี)</span>
                   </label>
                   <input
                     type="text"
                     value={referralCode}
                     onChange={(e) => setReferralCode(e.target.value)}
                     placeholder="กรอก REFERRAL CODE"
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                    className="w-full px-4 py-2.5 bg-[#063347] border border-[#506D7E] rounded-lg text-white placeholder-[#506D7E] focus:outline-none focus:border-[#E67700] focus:ring-1 focus:ring-[#E67700]"
                   />
                 </div>
 
                 {/* Slip Upload */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-[#B3BEC6] mb-1">
                     แนบสลิปโอนเงิน <span className="text-red-400">*</span>
                   </label>
                   <div
@@ -393,10 +393,10 @@ export default function RegisterPage() {
                     onClick={() => fileInputRef.current?.click()}
                     className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
                       isDragging
-                        ? "border-sky-400 bg-sky-950/30"
+                        ? "border-[#E67700] bg-[#E67700]/10"
                         : slipPreview
                         ? "border-green-600 bg-green-950/20"
-                        : "border-slate-600 hover:border-slate-500 bg-slate-900/50"
+                        : "border-[#506D7E] hover:border-[#E67700]/60 bg-[#063347]/70"
                     }`}
                   >
                     <input
@@ -417,20 +417,20 @@ export default function RegisterPage() {
                           className="max-h-40 mx-auto rounded mb-2"
                         />
                         <p className="text-green-400 text-sm">{slipFile?.name}</p>
-                        <p className="text-slate-500 text-xs mt-1">
+                        <p className="text-[#506D7E] text-xs mt-1">
                           คลิกเพื่อเปลี่ยนไฟล์
                         </p>
                       </div>
                     ) : (
                       <>
                         <div className="text-3xl mb-2">↑</div>
-                        <p className="text-slate-400">
+                        <p className="text-[#B3BEC6]/70">
                           ลากไฟล์หรือ{" "}
-                          <span className="text-sky-400 font-semibold">
+                          <span className="text-[#E67700] font-semibold">
                             คลิกเพื่อเลือกไฟล์
                           </span>
                         </p>
-                        <p className="text-slate-500 text-sm mt-1">
+                        <p className="text-[#506D7E] text-sm mt-1">
                           รองรับ JPG, PNG ขนาดไม่เกิน 5MB
                         </p>
                       </>
@@ -444,16 +444,16 @@ export default function RegisterPage() {
                     type="checkbox"
                     checked={needTaxInvoice}
                     onChange={(e) => setNeedTaxInvoice(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-600 bg-slate-900 text-sky-500 focus:ring-sky-500"
+                    className="w-4 h-4 rounded border-[#506D7E] bg-[#063347] text-[#E67700] focus:ring-[#E67700]"
                   />
-                  <span className="text-slate-300">ต้องการใบกำกับภาษี</span>
+                  <span className="text-[#B3BEC6]">ต้องการใบกำกับภาษี</span>
                 </label>
 
                 {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-lg rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+                  className="w-full py-3.5 bg-[#E67700] hover:bg-[#E67700]/90 text-white font-bold text-lg rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
                 >
                   {isSubmitting ? "กำลังส่งข้อมูล..." : "สมัครเรียนและชำระเงิน"}
                 </button>
@@ -464,8 +464,8 @@ export default function RegisterPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-6 mt-12">
-        <p className="text-center text-slate-500 text-sm">
+      <footer className="border-t border-[#506D7E]/30 py-6 mt-12">
+        <p className="text-center text-[#506D7E] text-sm">
           © 2026 GEMinw. All rights reserved.
         </p>
       </footer>
