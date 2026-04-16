@@ -11,11 +11,16 @@ interface Registration {
   email: string;
   facebook: string;
   referralCode: string | null;
-  slipPath: string;
   needTaxInvoice: boolean;
   status: string;
   createdAt: string;
 }
+
+const PKG_NAMES: Record<string, string> = {
+  GEM_A01: "🏪 GEM นักขายท้องถิ่น A01",
+  GEM_A02: "📦 GEM นักขายโกดังระเบิด A02",
+  GEM_COMBO: "🔥 โปรแพ็คคู่ (A01 & A02)",
+};
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-900/50 text-yellow-300 border-yellow-700",
@@ -33,6 +38,7 @@ export default function AdminPage() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSlip, setSelectedSlip] = useState<string | null>(null);
+  const [loadingSlip, setLoadingSlip] = useState(false);
 
   const fetchRegistrations = async () => {
     try {
@@ -49,6 +55,19 @@ export default function AdminPage() {
   useEffect(() => {
     fetchRegistrations();
   }, []);
+
+  const viewSlip = async (id: number) => {
+    setLoadingSlip(true);
+    try {
+      const res = await fetch(`/api/registrations?slipId=${id}`);
+      const data = await res.json();
+      if (data.slipPath) setSelectedSlip(data.slipPath);
+    } catch (error) {
+      console.error("Error loading slip:", error);
+    } finally {
+      setLoadingSlip(false);
+    }
+  };
 
   const updateStatus = async (id: number, status: string) => {
     try {
@@ -69,25 +88,25 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-slate-400 text-lg">กำลังโหลด...</p>
+      <div className="min-h-screen bg-[#063347] flex items-center justify-center">
+        <p className="text-[#B3BEC6] text-lg">กำลังโหลด...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#063347]">
       {/* Navbar */}
-      <nav className="bg-slate-950/80 backdrop-blur border-b border-slate-800">
+      <nav className="bg-[#042a3a]/80 backdrop-blur border-b border-[#506D7E]/30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <a href="/" className="text-xl font-bold text-white">
-              KVid
+              GEMinw
             </a>
-            <span className="text-slate-500">|</span>
-            <span className="text-slate-300">Admin Dashboard</span>
+            <span className="text-[#506D7E]">|</span>
+            <span className="text-[#B3BEC6]">Admin Dashboard</span>
           </div>
-          <span className="text-sm text-slate-400">
+          <span className="text-sm text-[#B3BEC6]/70">
             ทั้งหมด {registrations.length} รายการ
           </span>
         </div>
@@ -99,31 +118,31 @@ export default function AdminPage() {
         </h1>
 
         {registrations.length === 0 ? (
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-12 text-center">
-            <p className="text-slate-400 text-lg">ยังไม่มีรายการสมัคร</p>
+          <div className="bg-[#506D7E]/20 border border-[#506D7E]/40 rounded-xl p-12 text-center">
+            <p className="text-[#B3BEC6]/70 text-lg">ยังไม่มีรายการสมัคร</p>
           </div>
         ) : (
           <div className="space-y-4">
             {registrations.map((reg) => (
               <div
                 key={reg.id}
-                className="bg-slate-800/50 border border-slate-700 rounded-xl p-6"
+                className="bg-[#506D7E]/20 border border-[#506D7E]/40 rounded-xl p-6"
               >
                 <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                   {/* Info */}
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     <div>
-                      <span className="text-xs text-slate-500">ชื่อ-นามสกุล</span>
+                      <span className="text-xs text-[#506D7E]">ชื่อ-นามสกุล</span>
                       <p className="text-white font-medium">{reg.fullName}</p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">แพ็กเกจ</span>
-                      <p className="text-amber-400 font-medium">
-                        {reg.package === "VIP" ? "👑 VIP MASTERCLASS" : "📦 STANDARD"}
+                      <span className="text-xs text-[#506D7E]">แพ็กเกจ</span>
+                      <p className="text-[#E67700] font-medium">
+                        {PKG_NAMES[reg.package] || reg.package}
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">สถานะ</span>
+                      <span className="text-xs text-[#506D7E]">สถานะ</span>
                       <p>
                         <span
                           className={`inline-block px-2 py-0.5 rounded text-xs border ${
@@ -135,56 +154,50 @@ export default function AdminPage() {
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">LINE ID</span>
-                      <p className="text-slate-300">{reg.lineId}</p>
+                      <span className="text-xs text-[#506D7E]">LINE ID</span>
+                      <p className="text-[#B3BEC6]">{reg.lineId}</p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">เบอร์โทร</span>
-                      <p className="text-slate-300">{reg.phone}</p>
+                      <span className="text-xs text-[#506D7E]">เบอร์โทร</span>
+                      <p className="text-[#B3BEC6]">{reg.phone}</p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">Email</span>
-                      <p className="text-slate-300">{reg.email}</p>
+                      <span className="text-xs text-[#506D7E]">Email</span>
+                      <p className="text-[#B3BEC6]">{reg.email}</p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-500">Facebook</span>
-                      <p className="text-slate-300">{reg.facebook}</p>
+                      <span className="text-xs text-[#506D7E]">Email Gemini</span>
+                      <p className="text-[#B3BEC6]">{reg.facebook}</p>
                     </div>
                     {reg.referralCode && (
                       <div>
-                        <span className="text-xs text-slate-500">
-                          Referral Code
-                        </span>
-                        <p className="text-slate-300">{reg.referralCode}</p>
+                        <span className="text-xs text-[#506D7E]">Referral Code</span>
+                        <p className="text-[#B3BEC6]">{reg.referralCode}</p>
                       </div>
                     )}
                     <div>
-                      <span className="text-xs text-slate-500">วันที่สมัคร</span>
-                      <p className="text-slate-300">
+                      <span className="text-xs text-[#506D7E]">วันที่สมัคร</span>
+                      <p className="text-[#B3BEC6]">
                         {new Date(reg.createdAt).toLocaleString("th-TH")}
                       </p>
                     </div>
                     {reg.needTaxInvoice && (
                       <div>
-                        <span className="text-xs text-amber-400">
+                        <span className="text-xs text-[#E67700]">
                           📄 ต้องการใบกำกับภาษี
                         </span>
                       </div>
                     )}
                   </div>
 
-                  {/* Slip + Actions */}
+                  {/* Actions */}
                   <div className="flex flex-col items-center gap-3 lg:w-48">
                     <button
                       type="button"
-                      onClick={() => setSelectedSlip(reg.slipPath)}
-                      className="w-full"
+                      onClick={() => viewSlip(reg.id)}
+                      className="w-full py-2 bg-[#506D7E]/30 hover:bg-[#506D7E]/50 text-[#B3BEC6] text-sm rounded border border-[#506D7E] transition-colors"
                     >
-                      <img
-                        src={reg.slipPath}
-                        alt="สลิป"
-                        className="w-full h-24 object-cover rounded border border-slate-600 hover:border-sky-500 transition-colors cursor-pointer"
-                      />
+                      {loadingSlip ? "กำลังโหลด..." : "📎 ดูสลิป"}
                     </button>
                     <div className="flex gap-2 w-full">
                       <button
@@ -229,9 +242,9 @@ export default function AdminPage() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-6 mt-12">
-        <p className="text-center text-slate-500 text-sm">
-          © 2026 KVid Admin Dashboard
+      <footer className="border-t border-[#506D7E]/30 py-6 mt-12">
+        <p className="text-center text-[#506D7E] text-sm">
+          © 2026 GEMinw Admin Dashboard
         </p>
       </footer>
     </div>
